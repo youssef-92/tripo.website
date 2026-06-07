@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tripo — Travel together, effortlessly</title>
+  <meta name="description" content="Tripo is the all-in-one travel companion: plan group trips, find local guides, split expenses, book stays, and chat with your travel crew in real time.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --brand-dark: #025159;
+      --brand-light: #03A696;
+      --brand-gradient: linear-gradient(135deg, #025159 0%, #03A696 100%);
+      --surface: #ffffff;
+      --surface-muted: #f5f7f8;
+      --text: #1f2933;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --radius: 16px;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background: var(--surface);
+    }
+
+    a {
+      color: var(--brand-dark);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--brand-light);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--brand-dark);
+    }
+
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .nav-links a:hover {
+      color: var(--brand-light);
+    }
+
+    .nav-cta {
+      padding: 9px 18px;
+      background: var(--brand-gradient);
+      color: #fff !important;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      box-shadow: 0 6px 18px rgba(3, 166, 150, 0.3);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(3, 166, 150, 0.18), transparent 55%),
+        radial-gradient(circle at 85% 80%, rgba(2, 81, 89, 0.18), transparent 50%),
+        var(--surface);
+      padding: 80px 0 100px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 48px;
+      line-height: 1.15;
+      font-weight: 700;
+      margin: 0 0 20px;
+      color: var(--brand-dark);
+    }
+
+    .hero-content h1 .accent {
+      background: var(--brand-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin: 0 0 32px;
+      max-width: 520px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 22px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--brand-gradient);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 8px 22px rgba(2, 81, 89, 0.3);
+      transform: translateY(-1px);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--brand-dark);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--brand-light);
+      color: var(--brand-light);
+    }
+
+    .hero-visual {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      max-width: 320px;
+      margin: 0 auto;
+      background: var(--brand-gradient);
+      border-radius: 36px;
+      padding: 14px;
+      box-shadow: 0 30px 60px -20px rgba(2, 81, 89, 0.5);
+      transform: rotate(-3deg);
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #0b2a30;
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      gap: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .phone-screen .pin {
+      width: 50px;
+      height: 50px;
+      background: var(--brand-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-screen .pin svg {
+      width: 28px;
+      height: 28px;
+      color: #fff;
+    }
+
+    .phone-screen h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .phone-screen p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 13px;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-muted {
+      background: var(--surface-muted);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+      margin: 0 0 12px;
+      color: var(--brand-dark);
+      font-weight: 700;
+    }
+
+    .section-title p {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -10px rgba(2, 81, 89, 0.18);
+      border-color: var(--brand-light);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(3, 166, 150, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      color: var(--brand-dark);
+    }
+
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 0 0 8px;
+      color: var(--brand-dark);
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* How it works */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+      counter-reset: step;
+    }
+
+    .step {
+      text-align: center;
+    }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--brand-gradient);
+      color: #fff;
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      font-size: 17px;
+      margin: 0 0 8px;
+      color: var(--brand-dark);
+    }
+
+    .step p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* CTA banner */
+    .cta-banner {
+      background: var(--brand-gradient);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 60px 40px;
+      text-align: center;
+      box-shadow: 0 30px 60px -20px rgba(2, 81, 89, 0.4);
+    }
+
+    .cta-banner h2 {
+      font-size: 32px;
+      margin: 0 0 12px;
+      font-weight: 700;
+    }
+
+    .cta-banner p {
+      font-size: 16px;
+      opacity: 0.92;
+      margin: 0 0 28px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-banner .btn-primary {
+      background: #fff;
+      color: var(--brand-dark);
+    }
+
+    .cta-banner .btn-primary:hover {
+      color: var(--brand-dark);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-banner .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .cta-banner .btn-secondary:hover {
+      border-color: #fff;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Footer */
+    footer {
+      background: #0b2a30;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 56px 0 28px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand img {
+      height: 32px;
+      filter: brightness(0) invert(1);
+      margin-bottom: 14px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      max-width: 320px;
+      margin: 0;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-col li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col a {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 24px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        padding: 50px 0 70px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-row {
+        justify-content: center;
+      }
+
+      .hero-content h1 {
+        font-size: 36px;
+      }
+
+      .section-title h2 {
+        font-size: 28px;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-banner {
+        padding: 40px 24px;
+      }
+
+      .cta-banner h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="https://wayadvisory.fr/wp-content/uploads/2021/09/logo-tripo-transparent.png" alt="Tripo">
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1>Travel together, <span class="accent">effortlessly.</span></h1>
+        <p>Tripo is the all-in-one companion for group adventures. Plan trips with friends, find trusted local guides, split expenses, book stays, and chat with your crew — all in one place.</p>
+        <div class="cta-row">
+          <a href="#features" class="btn btn-secondary">See features</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="phone-screen">
+          <div class="pin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <h3>Your next adventure</h3>
+          <p>Starts here</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>Everything your trip needs</h2>
+        <p>One app for every step — from the spark of an idea to the memories you bring home.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <h3>Plan group trips</h3>
+          <p>Build itineraries together, vote on destinations with built-in polls, and keep every plan in sync for all members.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h3>Local guides</h3>
+          <p>Connect with verified guides who know the place inside out. Browse profiles, see programs, and book with confidence.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3h18l-2 13H5L3 3z"/>
+              <path d="M16 16a3 3 0 1 1-6 0"/>
+            </svg>
+          </div>
+          <h3>Split expenses</h3>
+          <p>Track who paid for what, settle up in a tap, and never argue about money on the road again.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <h3>Book stays</h3>
+          <p>Find and reserve accommodation that fits the whole group, with prices and availability surfaced in real time.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <h3>Group chat</h3>
+          <p>Keep every conversation, photo, and decision in one place — no more scattered messages across apps.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <h3>Discover destinations</h3>
+          <p>Swipe through curated places and programs to find the next spot that matches your vibe and budget.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="section-muted">
+    <div class="container">
+      <div class="section-title">
+        <h2>How Tripo works</h2>
+        <p>From idea to boarding in three steps.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Create a trip</h3>
+          <p>Pick a destination, set the dates, and invite your friends in seconds.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Plan together</h3>
+          <p>Vote on activities, book stays, and chat with a local guide — all inside the app.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Go and enjoy</h3>
+          <p>Follow your shared itinerary, share moments, and split costs along the way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Your next trip starts here</h2>
+        <p>Download Tripo on iOS and Android, sign in with your Google account, and start planning in under a minute.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="https://wayadvisory.fr/wp-content/uploads/2021/09/logo-tripo-transparent.png" alt="Tripo">
+          <p>The travel companion for groups who want to spend less time organizing and more time exploring.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#download">Download</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:support@tripo.app">support@tripo.app</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; <span id="year">2026</span> Tripo. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
