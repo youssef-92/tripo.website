@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["288D6NS776.io.tripo"],
+        "components": [
+          {
+            "/": "/trip/*",
+            "comment": "Open trip detail in the Tripo app"
+          }
+        ]
+      }
+    ]
+  }
+}
