@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open this trip in Tripo</title>
+  <meta name="description" content="Open this Tripo trip in the app, or download Tripo to join.">
+  <link rel="icon" type="image/svg+xml" href="logo-tripo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --brand-dark: #025159;
+      --brand-light: #03A696;
+      --brand-gradient: linear-gradient(135deg, #025159 0%, #03A696 100%);
+      --surface: #ffffff;
+      --surface-muted: #f5f7f8;
+      --text: #1f2933;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --radius: 16px;
+    }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-muted) 100%);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .container { max-width: 520px; margin: 0 auto; padding: 24px; width: 100%; }
+    header { padding: 18px 24px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); }
+    header a { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--brand-dark); font-weight: 700; }
+    header img { height: 36px; }
+    main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: 0 20px 50px -25px rgba(2, 81, 89, 0.25);
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(3, 166, 150, 0.12);
+      color: var(--brand-dark);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-size: 26px;
+      line-height: 1.25;
+      color: var(--brand-dark);
+      margin: 0 0 12px;
+      font-weight: 700;
+    }
+    p.lead {
+      color: var(--text-muted);
+      margin: 0 0 26px;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
+      border: 1.5px solid transparent;
+      text-decoration: none;
+      cursor: pointer;
+      width: 100%;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--brand-gradient);
+      color: #fff;
+    }
+    .btn-primary:hover { box-shadow: 0 10px 24px rgba(2, 81, 89, 0.3); transform: translateY(-1px); }
+    .btn-secondary {
+      background: #fff;
+      color: var(--brand-dark);
+      border-color: var(--border);
+      margin-top: 12px;
+    }
+    .btn-secondary:hover { border-color: var(--brand-light); color: var(--brand-light); }
+    .trip-id {
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      word-break: break-all;
+      margin-top: 20px;
+    }
+    .stores {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .hint {
+      margin-top: 22px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--brand-dark); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="padding:0;">
+      <a href="/">
+        <img src="logo-tripo.svg" alt="Tripo">
+        <span>Tripo</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="card">
+        <span class="badge">Shared trip</span>
+        <h1 id="title">Open this trip in Tripo</h1>
+        <p class="lead" id="lead">
+          If you already have the Tripo app, it should open automatically. Otherwise, install Tripo to view this trip and travel with your group.
+        </p>
+
+        <div class="stores">
+          <a id="primary-cta" class="btn btn-primary" href="#">
+            Open in Tripo
+          </a>
+          <a id="ios-store" class="btn btn-secondary" href="https://testflight.apple.com/join/REPLACE_WITH_TESTFLIGHT_CODE" style="display:none;">
+            Download for iOS (TestFlight)
+          </a>
+          <a id="android-store" class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=io.tripo" style="display:none;">
+            Download for Android
+          </a>
+        </div>
+
+        <p class="hint">After installing, tap the original link again to open the trip directly in the app.</p>
+        <p class="trip-id" id="trip-id"></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Tripo &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a>
+  </footer>
+
+  <script>
+    (function () {
+      var match = window.location.pathname.match(/^\/trip\/([^\/\?#]+)/);
+      var tripId = match ? decodeURIComponent(match[1]) : '';
+      var tripEl = document.getElementById('trip-id');
+      if (tripId) tripEl.textContent = 'Trip ID: ' + tripId;
+
+      var ua = navigator.userAgent || '';
+      var isIos = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+      var isAndroid = /Android/.test(ua);
+
+      var primary = document.getElementById('primary-cta');
+      var iosStore = document.getElementById('ios-store');
+      var androidStore = document.getElementById('android-store');
+
+      if (isIos) {
+        iosStore.style.display = 'inline-flex';
+        primary.textContent = 'Open in Tripo app';
+        // Universal Link: tapping the same URL again triggers iOS to open the app if installed.
+        // We point the primary CTA to the canonical URL so a second tap works after install.
+        primary.href = window.location.href;
+      } else if (isAndroid) {
+        androidStore.style.display = 'inline-flex';
+        primary.textContent = 'Open in Tripo app';
+        primary.href = 'intent://tripo.biz/trip/' + encodeURIComponent(tripId) +
+          '#Intent;scheme=https;package=io.tripo;S.browser_fallback_url=' +
+          encodeURIComponent('https://play.google.com/store/apps/details?id=io.tripo') + ';end';
+      } else {
+        // Desktop / unknown: show both store buttons, hide the primary deep-link button.
+        primary.style.display = 'none';
+        iosStore.style.display = 'inline-flex';
+        androidStore.style.display = 'inline-flex';
+        document.getElementById('lead').textContent =
+          'Open this link on your phone to view the trip in the Tripo app, or install Tripo from the stores below.';
+      }
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
